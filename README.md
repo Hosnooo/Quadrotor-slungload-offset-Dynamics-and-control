@@ -4,10 +4,11 @@ MATLAB and Maple project for modeling, controlling, simulating, and visualizing 
 
 This repository contains Maple worksheets for symbolic model/controller generation, MATLAB implementations of the generated dynamics, a QSFA outer-loop controller, a reduced-to-full command mapper, a geometric inner-loop controller, full nonlinear dynamics simulations, offset sensitivity studies, and 3D animation tools.
 
-<img width="1668" height="938" alt="offset_slung_load_animation (2)" src="https://github.com/user-attachments/assets/a44fc12c-7021-4d51-ac8b-ac2254b27100" />
-<img width="1668" height="938" alt="offset_slung_load_animation (1)" src="https://github.com/user-attachments/assets/53dfc9fa-2499-4a88-9ca9-469ffb2a6a86" />
-<img width="1668" height="938" alt="offset_slung_load_animation" src="https://github.com/user-attachments/assets/ad97293e-690e-4092-bf39-e079a4bfe1b9" />
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a44fc12c-7021-4d51-ac8b-ac2254b27100" width="32%" alt="offset slung-load animation 1" />
+  <img src="https://github.com/user-attachments/assets/53dfc9fa-2499-4a88-9ca9-469ffb2a6a86" width="32%" alt="offset slung-load animation 2" />
+  <img src="https://github.com/user-attachments/assets/ad97293e-690e-4092-bf39-e079a4bfe1b9" width="32%" alt="offset slung-load animation 3" />
+</p>
 
 ## Overview
 
