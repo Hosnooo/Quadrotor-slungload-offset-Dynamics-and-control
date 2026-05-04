@@ -6,7 +6,6 @@ This repository contains Maple worksheets for symbolic model/controller generati
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/dd5fd2c1-538a-44d6-a1eb-833e176136b0" width="32%" alt="offset slung-load animation 1" />
-  <img src="https://github.com/user-attachments/assets/1ed0d282-60f7-4816-a577-57bbb4857201" width="32%" alt="offset slung-load animation 2" />
   <img src="https://github.com/user-attachments/assets/0027f5ef-45de-488f-ae8c-34934cab431a" width="32%" alt="offset slung-load animation 3" />
 </p>
 
