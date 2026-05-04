@@ -5,8 +5,8 @@ MATLAB and Maple project for modeling, controlling, simulating, and visualizing 
 This repository contains Maple worksheets for symbolic model/controller generation, MATLAB implementations of the generated dynamics, a QSFA outer-loop controller, a reduced-to-full command mapper, a geometric inner-loop controller, full nonlinear dynamics simulations, offset sensitivity studies, and 3D animation tools.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/dd5fd2c1-538a-44d6-a1eb-833e176136b0" width="49%" alt="offset slung-load animation 1" />
-  <img src="https://github.com/user-attachments/assets/0027f5ef-45de-488f-ae8c-34934cab431a" width="49%" alt="offset slung-load animation 3" />
+  <img src="https://github.com/user-attachments/assets/dd5fd2c1-538a-44d6-a1eb-833e176136b0" width="49%" alt="Offset slung-load animation view 1" />
+  <img src="https://github.com/user-attachments/assets/0027f5ef-45de-488f-ae8c-34934cab431a" width="49%" alt="Offset slung-load animation view 2" />
 </p>
 
 ## Overview
@@ -29,38 +29,40 @@ The main focus areas are:
 
 ```text
 .
+├── README.md
 ├── Offset_Dynamics.mw
 ├── Offset_QSFA_U.mw
 │
-├── model_offset.m
-├── model_QSFA_U.m
-├── controller_QSFA_U.m
-├── mapper_QSFA_U_to_inner.m
-├── inner_loop_offset.m
-│
-├── run_outerloop.m
-├── run_full_dynamics.m
-├── run_loops_diagnosis.m
-├── run_sensitivity_offset.m
-├── animate_offset_slungload.m
-│
-└── simulationtools/
-    ├── add_tracking_gains_from_poles.m
-    ├── figureoptscall.m
-    ├── ref_fig8.m
-    ├── ref_fig8_zsin.m
-    ├── ref_helix.m
-    ├── ref_regulation_steps.m
-    ├── ref_spiral.m
-    ├── saveFigureAsPDF.m
-    └── simulate_closed_loop.m
+└── matlab_core_offset/
+    ├── model_offset.m
+    ├── model_QSFA_U.m
+    ├── controller_QSFA_U.m
+    ├── mapper_QSFA_U_to_inner.m
+    ├── inner_loop_offset.m
+    │
+    ├── run_outerloop.m
+    ├── run_full_dynamics.m
+    ├── run_loops_diagnosis.m
+    ├── run_sensitivity_offset.m
+    ├── animate_offset_slungload.m
+    │
+    └── simulationtools/
+        ├── add_tracking_gains_from_poles.m
+        ├── figureoptscall.m
+        ├── ref_fig8.m
+        ├── ref_fig8_zsin.m
+        ├── ref_helix.m
+        ├── ref_regulation_steps.m
+        ├── ref_spiral.m
+        ├── saveFigureAsPDF.m
+        └── simulate_closed_loop.m
 ```
 
 ## Main Components
 
 ### Maple worksheets
 
-The symbolic source files are:
+The symbolic source files are located in the repository root:
 
 - `Offset_Dynamics.mw`
 - `Offset_QSFA_U.mw`
@@ -68,33 +70,47 @@ The symbolic source files are:
 `Offset_Dynamics.mw` contains the symbolic construction of the full offset slung-load dynamic model and is used to generate:
 
 ```text
-model_offset.m
+matlab_core_offset/model_offset.m
 ```
 
 `Offset_QSFA_U.mw` contains the symbolic construction of the reduced QSFA effective-force model and controller and is used to generate:
 
 ```text
-model_QSFA_U.m
-controller_QSFA_U.m
+matlab_core_offset/model_QSFA_U.m
+matlab_core_offset/controller_QSFA_U.m
 ```
 
-The Maple worksheets reference auxiliary Maple scripts such as `MIMOTools.mpl` and `matlabsims.mpl`. These are only needed if the symbolic derivation or MATLAB-code generation is repeated. The MATLAB simulations can be run directly using the generated `.m` files included in the repository.
+The Maple worksheets reference auxiliary Maple scripts such as `MIMOTools.mpl` and `matlabsims.mpl`. These auxiliary scripts are only needed if the symbolic derivation or MATLAB-code generation is repeated. The MATLAB simulations can be run directly using the generated `.m` files included in `matlab_core_offset/`.
+
+### MATLAB core folder
+
+All executable MATLAB simulation files are stored in:
+
+```text
+matlab_core_offset/
+```
+
+Run MATLAB scripts from inside this folder, because the scripts use relative paths such as:
+
+```matlab
+addpath('simulationtools');
+```
 
 ### Generated MATLAB model files
 
 | File | Purpose |
 |---|---|
-| `model_offset.m` | Full nonlinear offset slung-load plant model. |
-| `model_QSFA_U.m` | Reduced QSFA effective-force model. |
-| `controller_QSFA_U.m` | Generated QSFA outer-loop controller. |
+| `matlab_core_offset/model_offset.m` | Full nonlinear offset slung-load plant model. |
+| `matlab_core_offset/model_QSFA_U.m` | Reduced QSFA effective-force model. |
+| `matlab_core_offset/controller_QSFA_U.m` | Generated QSFA outer-loop controller. |
 
 ### Control and mapping files
 
 | File | Purpose |
 |---|---|
-| `controller_QSFA_U.m` | Computes the reduced outer-loop effective-force command `U_d`. |
-| `mapper_QSFA_U_to_inner.m` | Maps the reduced-model command to full thrust, attitude, angular velocity, and angular acceleration references. |
-| `inner_loop_offset.m` | Geometric attitude inner-loop controller for the offset suspension-point system. |
+| `matlab_core_offset/controller_QSFA_U.m` | Computes the reduced outer-loop effective-force command `U_d`. |
+| `matlab_core_offset/mapper_QSFA_U_to_inner.m` | Maps the reduced-model command to full thrust, attitude, angular velocity, and angular acceleration references. |
+| `matlab_core_offset/inner_loop_offset.m` | Geometric attitude inner-loop controller for the offset suspension-point system. |
 
 The full-dynamics control architecture is:
 
@@ -116,15 +132,19 @@ Full nonlinear offset slung-load plant
 
 | Script | Description |
 |---|---|
-| `run_outerloop.m` | Simulates the reduced QSFA outer-loop model using the generated reduced model and controller. |
-| `run_full_dynamics.m` | Simulates the full nonlinear offset slung-load dynamics with the QSFA outer loop, mapper, and geometric inner loop. |
-| `run_loops_diagnosis.m` | Diagnostic script for checking consistency between the outer loop, mapper, inner loop, and full plant. |
-| `run_sensitivity_offset.m` | Runs a sensitivity study over multiple suspension-point offset vectors. |
-| `animate_offset_slungload.m` | Loads a saved full-dynamics simulation and exports a 3D animation/video of the quadrotor, cable, and load. |
+| `matlab_core_offset/run_outerloop.m` | Simulates the reduced QSFA outer-loop model using the generated reduced model and controller. |
+| `matlab_core_offset/run_full_dynamics.m` | Simulates the full nonlinear offset slung-load dynamics with the QSFA outer loop, mapper, and geometric inner loop. |
+| `matlab_core_offset/run_loops_diagnosis.m` | Diagnostic script for checking consistency between the outer loop, mapper, inner loop, and full plant. |
+| `matlab_core_offset/run_sensitivity_offset.m` | Runs a sensitivity study over multiple suspension-point offset vectors. |
+| `matlab_core_offset/animate_offset_slungload.m` | Loads a saved full-dynamics simulation and exports a 3D animation/video of the quadrotor, cable, and load. |
 
 ## Reference Trajectories
 
-Reference functions are stored in `simulationtools/`.
+Reference functions are stored in:
+
+```text
+matlab_core_offset/simulationtools/
+```
 
 | Function | Description |
 |---|---|
@@ -134,7 +154,7 @@ Reference functions are stored in `simulationtools/`.
 | `ref_spiral.m` | Spiral trajectory. |
 | `ref_regulation_steps.m` | Piecewise-constant regulation/step mission. |
 
-The full-dynamics script also supports a `hover` case.
+The full-dynamics script also supports a built-in `hover` case.
 
 ## Requirements
 
@@ -158,11 +178,25 @@ git clone https://github.com/Hosnooo/Quadrotor-slungload-offset-Dynamics-and-con
 cd Quadrotor-slungload-offset-Dynamics-and-control
 ```
 
-### 2. Open MATLAB in the repository folder
+### 2. Enter the MATLAB core folder
 
-Start MATLAB and set the current folder to the repository root.
+The runnable MATLAB scripts are inside `matlab_core_offset/`.
 
-### 3. Add the simulation tools folder
+```bash
+cd matlab_core_offset
+```
+
+### 3. Open MATLAB in `matlab_core_offset/`
+
+Start MATLAB with the current folder set to:
+
+```text
+Quadrotor-slungload-offset-Dynamics-and-control/matlab_core_offset/
+```
+
+This is important because the scripts use relative paths to the `simulationtools/` folder.
+
+### 4. Add the simulation tools folder
 
 Most scripts already include:
 
@@ -176,7 +210,7 @@ You can also add it manually:
 addpath('simulationtools');
 ```
 
-### 4. Run the reduced outer-loop simulation
+### 5. Run the reduced outer-loop simulation
 
 ```matlab
 run_outerloop
@@ -184,7 +218,7 @@ run_outerloop
 
 This runs the reduced QSFA effective-force model and controller.
 
-### 5. Run the full nonlinear dynamics simulation
+### 6. Run the full nonlinear dynamics simulation
 
 ```matlab
 run_full_dynamics
@@ -197,9 +231,23 @@ This runs the full offset slung-load simulation using:
 - Geometric inner-loop attitude controller
 - Full nonlinear offset plant model
 
-### 6. Animate the full-dynamics result
+### 7. Animate the full-dynamics result
 
-After running `run_full_dynamics`, run:
+Before running the animation, make sure the `trajectory_name` in `animate_offset_slungload.m` matches the trajectory simulated by `run_full_dynamics.m`.
+
+For example, if `run_full_dynamics.m` uses:
+
+```matlab
+trajectory_name = 'fig8_zsin';
+```
+
+then set the same value in `animate_offset_slungload.m`:
+
+```matlab
+trajectory_name = 'fig8_zsin';
+```
+
+Then run:
 
 ```matlab
 animate_offset_slungload
@@ -209,7 +257,7 @@ This loads the saved simulation file and exports an animation/video.
 
 ## Recommended Main Workflow
 
-For a complete full-dynamics simulation and animation, run:
+From inside `matlab_core_offset/`, run:
 
 ```matlab
 run_full_dynamics
@@ -219,30 +267,30 @@ animate_offset_slungload
 The full-dynamics script saves results to:
 
 ```text
-results_offset_fulldynamics/<trajectory_name>/
+matlab_core_offset/results_offset_fulldynamics/<trajectory_name>/
 ```
 
 For example:
 
 ```text
-results_offset_fulldynamics/fig8_zsin/
+matlab_core_offset/results_offset_fulldynamics/fig8_zsin/
 ```
 
 The animation script loads:
 
 ```text
-results_offset_fulldynamics/<trajectory_name>/sim_offset_QSFA_U.mat
+matlab_core_offset/results_offset_fulldynamics/<trajectory_name>/sim_offset_QSFA_U.mat
 ```
 
 and saves animation outputs under:
 
 ```text
-results_offset_fulldynamics/<trajectory_name>/animation/
+matlab_core_offset/results_offset_fulldynamics/<trajectory_name>/animation/
 ```
 
 ## Changing the Reference Trajectory
 
-In `run_full_dynamics.m`, change:
+In `matlab_core_offset/run_full_dynamics.m`, change:
 
 ```matlab
 trajectory_name = 'fig8_zsin';
@@ -259,7 +307,7 @@ spiral
 regulation_steps
 ```
 
-In `run_outerloop.m`, change:
+In `matlab_core_offset/run_outerloop.m`, change:
 
 ```matlab
 ref_fun = @ref_fig8;
@@ -275,9 +323,11 @@ ref_fun = @ref_spiral;
 ref_fun = @ref_regulation_steps;
 ```
 
+For animation, update the `trajectory_name` inside `matlab_core_offset/animate_offset_slungload.m` to match the saved simulation folder.
+
 ## Changing the Offset Vector
 
-The offset vector is defined in the quadrotor body frame. In `run_full_dynamics.m`, the nominal offset is:
+The offset vector is defined in the quadrotor body frame. In `matlab_core_offset/run_full_dynamics.m`, the nominal offset is:
 
 ```matlab
 p.r = [0.25; 0; 0];
@@ -315,9 +365,9 @@ Depending on the script, outputs may include:
 Typical output folders include:
 
 ```text
-results_offset_outerloop/
-results_offset_fulldynamics/
-results_offset_sensitivity/
+matlab_core_offset/results_offset_outerloop/
+matlab_core_offset/results_offset_fulldynamics/
+matlab_core_offset/results_offset_sensitivity/
 ```
 
 Full-dynamics outputs include files such as:
@@ -399,7 +449,7 @@ Here, `u_t` is the total thrust command and `tau_cm` is the torque command about
 The repository uses:
 
 ```text
-simulationtools/figureoptscall.m
+matlab_core_offset/simulationtools/figureoptscall.m
 ```
 
 to apply consistent figure formatting and LaTeX-style plot labels.
@@ -412,11 +462,12 @@ saveFigureAsPDF(figHandle, fileName)
 
 ## Suggested Workflow for Development
 
-1. Run `run_loops_diagnosis.m` to check consistency between the controller, mapper, inner loop, and full plant.
-2. Run `run_outerloop.m` to verify the reduced QSFA controller.
-3. Run `run_full_dynamics.m` to simulate the full nonlinear offset slung-load system.
-4. Run `animate_offset_slungload.m` to create a 3D video of the saved simulation.
-5. Run `run_sensitivity_offset.m` to compare tracking performance across multiple offset vectors.
+1. Open MATLAB in `matlab_core_offset/`.
+2. Run `run_loops_diagnosis.m` to check consistency between the controller, mapper, inner loop, and full plant.
+3. Run `run_outerloop.m` to verify the reduced QSFA controller.
+4. Run `run_full_dynamics.m` to simulate the full nonlinear offset slung-load system.
+5. Run `animate_offset_slungload.m` to create a 3D video of the saved simulation.
+6. Run `run_sensitivity_offset.m` to compare tracking performance across multiple offset vectors.
 
 ## Citation
 
