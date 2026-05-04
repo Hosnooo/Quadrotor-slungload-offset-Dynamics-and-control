@@ -3,6 +3,7 @@
 MATLAB and Maple project for modeling, controlling, simulating, and visualizing a quadrotor carrying a slung load with an offset suspension point.
 
 This repository contains Maple worksheets for symbolic model/controller generation, MATLAB implementations of the generated dynamics, a QSFA outer-loop controller, a reduced-to-full command mapper, a geometric inner-loop controller, full nonlinear dynamics simulations, offset sensitivity studies, and 3D animation tools.
+<img width="1348" height="938" alt="image" src="https://github.com/user-attachments/assets/806be84c-bbcf-458d-9ef3-9f31e928759d" />
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/a44fc12c-7021-4d51-ac8b-ac2254b27100" width="32%" alt="offset slung-load animation 1" />
