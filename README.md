@@ -5,22 +5,14 @@ MATLAB and Maple project for modeling, controlling, simulating, and visualizing 
 This repository contains Maple worksheets for symbolic model/controller generation, MATLAB implementations of the generated dynamics, a QSFA outer-loop controller, a reduced-to-full command mapper, a geometric inner-loop controller, full nonlinear dynamics simulations, offset sensitivity studies, and 3D animation tools.
 
 <p align="center">
-<table>
-  <tr>
-    <td width="50%" rowspan="2">
-      <img src="https://github.com/user-attachments/assets/d22b210f-6634-42d3-8962-979cf67d7480" width="100%" alt="Offset slung-load animation view 1" />
-    </td>
-    <td width="50%">
-      <img src="https://github.com/user-attachments/assets/6c8f2e35-e032-4af3-9e70-c89803304921" width="100%" alt="Offset slung-load animation view 2" />
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src="https://github.com/user-attachments/assets/5468919f-e939-476c-ac75-fee4f3531a76" width="100%" alt="Offset slung-load animation view 3" />
-    </td>
-  </tr>
-</table>
+  <img src="https://github.com/user-attachments/assets/d22b210f-6634-42d3-8962-979cf67d7480" width="90%" alt="Offset slung-load animation view 1" />
 </p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6c8f2e35-e032-4af3-9e70-c89803304921" width="49%" alt="Offset slung-load animation view 2" />
+  <img src="https://github.com/user-attachments/assets/5468919f-e939-476c-ac75-fee4f3531a76" width="49%" alt="Offset slung-load animation view 3" />
+</p>
+
 ## Overview
 
 This project studies the dynamics and control of an offset quadrotor slung-load system. The suspended load is connected to the quadrotor through a cable attached at an offset point rather than directly at the vehicle center of mass. This offset introduces additional coupling between the quadrotor attitude, cable direction, load motion, thrust command, and control torque.
